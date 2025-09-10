@@ -1,4 +1,5 @@
 import "./App.css";
+import { Button } from "@/components/ui/button";
 
 function App() {
   return (
@@ -10,6 +11,9 @@ function App() {
         <p className="text-gray-700">
           Un pequeño CRUD para gestionar sílabos académicos.
         </p>
+      </div>
+      <div className="flex min-h-svh flex-col items-center justify-center">
+        <Button>Click me</Button>
       </div>
     </>
   );
