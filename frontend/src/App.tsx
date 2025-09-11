@@ -1,67 +1,80 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import * as Tabs from "@radix-ui/react-tabs";
+import "./index.css"; // Tus propios estilos
 
 function App() {
+  const [activeTab, setActiveTab] = useState("profile");
+
   return (
     <>
-      <Card className="w-[350px]">
-        <CardHeader>
-          <CardTitle>Perfil de Usuario</CardTitle>
-          <CardDescription>Información básica del usuario</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div>
-              <p className="text-sm font-medium">Nombre: Juan Pérez</p>
-              <p className="text-sm text-muted-foreground">
-                Email: juan@ejemplo.com
-              </p>
-            </div>
+      <Dialog.Root>
+        <Dialog.Trigger asChild>
+          <button className="Button violet">Ajustes de Usuario</button>
+        </Dialog.Trigger>
 
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="outline">Editar Perfil</Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Editar Perfil</DialogTitle>
-                  <DialogDescription>
-                    Realiza cambios en tu perfil aquí. Guarda cuando termines.
-                  </DialogDescription>
-                </DialogHeader>
+        <Dialog.Portal>
+          <Dialog.Overlay className="DialogOverlay" />
+          <Dialog.Content className="DialogContent">
+            <Dialog.Title className="DialogTitle">
+              Ajustes de Usuario
+            </Dialog.Title>
+
+            <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
+              <Tabs.List className="TabsList">
+                <Tabs.Trigger className="TabsTrigger" value="profile">
+                  Perfil
+                </Tabs.Trigger>
+                <Tabs.Trigger className="TabsTrigger" value="security">
+                  Seguridad
+                </Tabs.Trigger>
+                <Tabs.Trigger className="TabsTrigger" value="preferences">
+                  Preferencias
+                </Tabs.Trigger>
+              </Tabs.List>
+
+              <Tabs.Content className="TabsContent" value="profile">
                 <div className="space-y-4">
-                  <input
-                    className="w-full p-2 border rounded"
-                    placeholder="Nombre"
-                    defaultValue="Juan Pérez"
-                  />
-                  <input
-                    className="w-full p-2 border rounded"
-                    placeholder="Email"
-                    type="email"
-                    defaultValue="juan@ejemplo.com"
-                  />
-                  <Button>Guardar Cambios</Button>
+                  <h3>Información del Perfil</h3>
+                  <input placeholder="Nombre" className="Input" />
+                  <input placeholder="Email" className="Input" />
                 </div>
-              </DialogContent>
-            </Dialog>
-          </div>
-        </CardContent>
-      </Card>
+              </Tabs.Content>
+
+              <Tabs.Content className="TabsContent" value="security">
+                <div className="space-y-4">
+                  <h3>Configuración de Seguridad</h3>
+                  <button className="Button">Cambiar Contraseña</button>
+                  <button className="Button">
+                    Autenticación de Dos Factores
+                  </button>
+                </div>
+              </Tabs.Content>
+
+              <Tabs.Content className="TabsContent" value="preferences">
+                <div className="space-y-4">
+                  <h3>Preferencias</h3>
+                  <label>
+                    <input type="checkbox" /> Tema Oscuro
+                  </label>
+                  <label>
+                    <input type="checkbox" /> Notificaciones por Email
+                  </label>
+                </div>
+              </Tabs.Content>
+            </Tabs.Root>
+
+            <div className="DialogActions">
+              <Dialog.Close asChild>
+                <button className="Button green">Guardar</button>
+              </Dialog.Close>
+              <Dialog.Close asChild>
+                <button className="Button">Cancelar</button>
+              </Dialog.Close>
+            </div>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </>
   );
 }

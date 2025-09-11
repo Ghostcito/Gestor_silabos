@@ -1,3 +1,4 @@
+@import "@radix-ui/themes/styles.css";
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -117,4 +118,161 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+/* Estilos para el diálogo */
+.DialogOverlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.DialogContent {
+  background: white;
+  border-radius: 6px;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 450px;
+  max-height: 85vh;
+  padding: 25px;
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.DialogContent:focus {
+  outline: none;
+}
+
+.DialogTitle {
+  margin: 0;
+  font-weight: 500;
+  color: #333;
+  font-size: 17px;
+  margin-bottom: 15px;
+}
+
+.DialogDescription {
+  margin: 10px 0 20px;
+  color: #666;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.DialogActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Botones */
+.Button {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 0 15px;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 500;
+  height: 35px;
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.Button.violet {
+  background-color: white;
+  color: #6d28d9;
+  border: 1px solid #6d28d9;
+}
+
+.Button.violet:hover {
+  background-color: #f5f3ff;
+}
+
+.Button.green {
+  background-color: #10b981;
+  color: white;
+}
+
+.Button.green:hover {
+  background-color: #059669;
+}
+
+.Button:focus {
+  box-shadow: 0 0 0 2px #ddd6fe;
+}
+
+/* Tabs */
+.TabsList {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 20px;
+}
+
+.TabsTrigger {
+  all: unset;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 200ms;
+}
+
+.TabsTrigger[data-state="active"] {
+  border-bottom-color: #6d28d9;
+  color: #6d28d9;
+}
+
+.TabsTrigger:hover {
+  color: #6d28d9;
+}
+
+.TabsContent {
+  outline: none;
+}
+
+/* Inputs */
+.Input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.Input:focus {
+  outline: none;
+  border-color: #6d28d9;
+  box-shadow: 0 0 0 2px #ddd6fe;
+}
+
+/* Animaciones */
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Espaciado */
+.space-y-4 > * + * {
+  margin-top: 1rem;
 }
