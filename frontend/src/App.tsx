@@ -1,17 +1,67 @@
-import "./App.css";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 function App() {
   return (
     <>
-      <div className="container mx-auto p-4">
-        <h1 className="text-3xl font-bold text-blue-600 mb-4">Mi Aplicación</h1>
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Botón de ejemplo
-          </button>
-          <p className="mt-4 text-gray-700">Despues de rebase</p>
-        </div>
-      </div>
+      <Card className="w-[350px]">
+        <CardHeader>
+          <CardTitle>Perfil de Usuario</CardTitle>
+          <CardDescription>Información básica del usuario</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div>
+              <p className="text-sm font-medium">Nombre: Juan Pérez</p>
+              <p className="text-sm text-muted-foreground">
+                Email: juan@ejemplo.com
+              </p>
+            </div>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline">Editar Perfil</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Editar Perfil</DialogTitle>
+                  <DialogDescription>
+                    Realiza cambios en tu perfil aquí. Guarda cuando termines.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <input
+                    className="w-full p-2 border rounded"
+                    placeholder="Nombre"
+                    defaultValue="Juan Pérez"
+                  />
+                  <input
+                    className="w-full p-2 border rounded"
+                    placeholder="Email"
+                    type="email"
+                    defaultValue="juan@ejemplo.com"
+                  />
+                  <Button>Guardar Cambios</Button>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </CardContent>
+      </Card>
     </>
   );
 }
