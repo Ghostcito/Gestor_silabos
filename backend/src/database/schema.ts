@@ -7,7 +7,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 export const silabos = pgTable("silabos", {
-  id: integer().primaryKey(),
+  id: integer().primaryKey().generatedAlwaysAsIdentity(), // ID autoincremental
   codigo: varchar("codigo", { length: 10 }).notNull().unique(), // Ej: "CS101"
   nombre: varchar("nombre", { length: 100 }).notNull(), // Ej: "Programación I"
   creditos: integer("creditos").notNull(),
